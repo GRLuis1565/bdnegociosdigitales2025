@@ -103,4 +103,4 @@ where categoriaid = 5
 select * from categoria
 ```
 ## Diagrama Resultante
-![Diagrama Resultante](./images/DiagramaPrincipal.png)
+![Diagrama Resultante](../images/DiagramaPrincipal.png)
