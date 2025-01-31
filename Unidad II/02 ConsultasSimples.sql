@@ -103,8 +103,8 @@ select * from Orders where (ShipCountry = 'france' or ShipCountry = 'germany') a
 -- clientes que no sean de mexico o usa y que tengan fax registrado 
 select Country, City, Fax, CompanyName from Customers where (Country != 'Mexico' and Country != 'usa') and Fax is not null
 
--- pedidos con flete mayor a 100 enviados a brasil o argentina, pero no enviados por el transportista 1
-select Freight, ShipCountry, ShipName from Orders where Freight > 100 and ShipCountry = 'brazil' and ShipCountry = 'argentina' and not ShipName = 1
+-- pedidos con flete mayor a 100 enviados a brasil o venezuela, pero no enviados por el transportista 1
+select Freight, ShipCountry, ShipName from Orders where Freight > 100  and ShipCountry = 'brazil' or ShipCountry = 'venezuela' and ShipName = 'vins et alcools Chevalier'
 
 -- selecionar empleados que no viven en londres o seattle y que fueron contratados despues de 1995
 select CONCAT(FirstName, '', LastName) as [Nombre completo], HireDate, City, Country from Employees where (City != 'london' and City != 'seattle' and YEAR(HireDate) >= 1992)
@@ -120,4 +120,54 @@ select OrderID, OrderDate, ShipRegion from Orders where ShipRegion in ('rj', 'tá
 -- seleccionar las ordenes que tengan cantidades de 12, 9 y 40 y descuento de 0.15 o 0.5
 select * from [Order Details] where Quantity in (12,9,40) and Discount in (0.15, 0.5)
 
--- CLAUSULA BETWEEN
+-- CLAUSULA BETWEEN (siempre van en el where) 
+-- between valorinicial and valorfinal 
+-- mostrar los productos con precio entre 10 y 50 
+select * from Products where UnitPrice >= 10 and UnitPrice <= 50;
+
+select * from Products where UnitPrice between 10 and 50
+
+-- seleccionar todos los pedidos relaisados entre el 1 de enero y el 30 de junio de 1997
+
+select * from Orders where OrderDate >= '1997-01-01' and OrderDate <= '1997-30-06'
+
+select * from Orders where OrderDate between '1997-01-01' and '1997-30-06'
+
+-- seleccionar todos los empeados contratados entre 1990 y 1995 que trabajan en londres 
+select * from Employees where year(HireDate) >= 1992 and year(HireDate) <= 1994 and City = 'london'
+
+select * from Employees where year(HireDate) between 1992 and 1994 and City = 'london'
+
+-- pedidos con flete (freigh) entre 50 y 200 enviados a alemania y fracia 
+
+select OrderID as 'Numero de orden', OrderDate as 'Fecha de orden', RequiredDate as 'Fecha de entrega', Freight as 'Peso', ShipCountry as 'Pais de entrega' from Orders where Freight >= 50 and Freight <= 200 and ShipCountry in ('germany', 'france')
+
+select OrderID as 'Numero de orden', OrderDate as 'Fecha de orden', RequiredDate as 'Fecha de entrega', Freight as 'Peso', ShipCountry as 'Pais de entrega'  from Orders where Freight between 50 and 200 and ShipCountry in ('germany', 'france')
+
+-- seleccionar todos los productos que tengan precio entre 5 y 20 dolares o que sean de la categoria 1,2 o 3
+select UnitPrice, CategoryID from Products where UnitPrice >= 5 and UnitPrice <= 20 or CategoryID in (1,2,3)
+select UnitPrice, CategoryID from Products where UnitPrice  between 5 and 20 or CategoryID in (1,2,3)
+
+-- empleados con numero de trabajador entre 3 y 7 que no trabajan en londres ni seattle 
+
+select EmployeeID, concat(FirstName, '' ,LastName) as 'Nombre completo', City from Employees where EmployeeID >= 1 and EmployeeID <= 7 and City != 'london' and City != 'seattle' 
+select EmployeeID, concat(FirstName, '' ,LastName) as 'Nombre completo', City from Employees where EmployeeID between 1 and 7 and City != 'london' and City != 'seattle' 
+
+-- clausula like, patrones:
+-- 1) %  representa cero o mas caracteres en el patron de busqueda 
+-- 2) _  representa exactamente un caracter en el patron de busqueda 
+-- 3) [] se utilisa para definir un conjunto de caracteres buscando cualquiera de ellos en la posicion especifica 
+-- 4) [^] se utilisa para buscar caracteres que no estan dentro del conjunto espesifico 
+
+-- buscar los productos que comiensan con cha
+select * from Products where ProductName like 'cha%'
+select * from Products where ProductName like 'cha%' and UnitPrice = 18
+
+-- buscar todos los productos que terminen con e 
+select * from Products where ProductName like '%e'
+
+-- seleccionar todos los clientes cuyo nombre de empresa contiene la palabra "co" en cualquier parte
+select * from Customers where CompanyName like '%co%'
+
+-- seleccionar los empleados cuyo nombre comiense con a y tenga exactamente 5 caracteres
+select FirstName,LastName from Employees where FirstName like 'a_____%'
