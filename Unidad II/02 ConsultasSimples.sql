@@ -153,6 +153,37 @@ select UnitPrice, CategoryID from Products where UnitPrice  between 5 and 20 or 
 select EmployeeID, concat(FirstName, '' ,LastName) as 'Nombre completo', City from Employees where EmployeeID >= 1 and EmployeeID <= 7 and City != 'london' and City != 'seattle' 
 select EmployeeID, concat(FirstName, '' ,LastName) as 'Nombre completo', City from Employees where EmployeeID between 1 and 7 and City != 'london' and City != 'seattle' 
 
+-- TAREA 
+-- Productos categoria 1,3 o 5 
+select * from Products where CategoryID = 1 or CategoryID = 3 or CategoryID = 5 
+
+-- Clientes de México, Brasil o Argentina
+ select * from Customers where Country = 'mexico' or Country = 'brazil' or Country = 'argentina'
+
+ -- Pedidos enviados por los transportistas 1, 2 o 3 y con flete mayor a 50
+ select * from Orders where ShipVia in (1,2,3) and Freight > 50
+
+ -- Empleados que trabajan en Londres, Seattle o Buenos Aires
+ select * from Employees where City in ('london', 'seattle', 'buenos aires')
+
+ -- Pedidos de clientes en Francia o Alemania, pero con un flete menor a 100
+select * from Orders where ShipCountry in ('france', 'germany') and Freight < 100
+
+-- Productos con categoría 2, 4 o 6 y que NO estén descontinuados
+select * from Products where CategoryID in (2,4,6) and Discontinued = 0
+
+-- Clientes que NO son de Alemania, Reino Unido ni Canadá
+select * from Customers where Country != 'germany' and Country != 'uk' and Country != 'canada'
+
+-- Pedidos enviados por transportistas 2 o 3, pero que NO sean a USA ni Canadá
+select * from Orders where ShipVia in (2,3) and ShipCountry != 'usa' and ShipCountry != 'canada'
+
+-- Empleados que trabajan en 'London' o 'Seattle' y fueron contratados después de 1995
+select * from Employees where City in ('london', 'seattle') and year(HireDate) > 1995 
+
+-- Productos de categorías 1, 3 o 5 con stock mayor a 50 y que NO están descontinuados
+select * from Products where CategoryID in (1,3,5) and UnitsInStock > 50 and Discontinued = 0
+
 -- clausula like, patrones:
 -- 1) %  representa cero o mas caracteres en el patron de busqueda 
 -- 2) _  representa exactamente un caracter en el patron de busqueda 
@@ -171,3 +202,25 @@ select * from Customers where CompanyName like '%co%'
 
 -- seleccionar los empleados cuyo nombre comiense con a y tenga exactamente 5 caracteres
 select FirstName,LastName from Employees where FirstName like 'a_____%'
+
+-- seleccionar los productos que comiensen con a o b 
+select * from Products where ProductName like '[abc]%'
+select * from Products where ProductName like '[a-m]%'
+
+-- seleccionar todos los productos que no comiensen con a o b 
+select * from Products where ProductName like '[^ab]%'
+
+--selecionar todos los productos donde el nombre comience con a pero no e 
+select * from Products where ProductName like 'a[^e]%' 
+
+-- Clausula order by 
+select ProductID, ProductName, UnitPrice, UnitsInStock from Products order by UnitPrice desc
+
+select ProductID, ProductName, UnitPrice, UnitsInStock from Products order by 3 desc
+
+select ProductID, ProductName, UnitPrice as 'precio', UnitsInStock from Products order by 'precio' desc
+
+-- seleccionar los clientes ordenados por el pais y dentro por ciudad 
+select CustomerID, Country, City from Customers order by Country, City
+select CustomerID, Country, City, Region from Customers where Country in ('brazil', 'germany') and Region is not null order by Country, City desc
+
