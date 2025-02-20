@@ -1,3 +1,7 @@
+# inner joins
+![Inner Join](../img/img_inner_join.png)
+``` SQL
+
 -- seleccionar todas las categorias y produc
 use Northwind
 select * from Categories inner join Products on Categories.CategoryID = Products.CategoryID;
@@ -106,4 +110,4 @@ select p.ProductName, c.CategoryName from Products as p join Categories as c on 
 select c.CompanyName from Customers as c join Orders as o on c.CustomerID = o.CustomerID where Country = 'germany ' and o.OrderDate <= '1997-01-01'
 
 -- 26 listar los clientes que an realizado pedidos con un total entre $500 y $2000
-select c.CompanyName, sum(od.Quantity * od.UnitPrice) as Total from Customers as c join Orders as o on c.CustomerID = o.CustomerID join [Order Details] as od on od.OrderID = o.OrderID group by c.CompanyNam
+select * from Customers as c join Orders as o on c.CustomerID = o.CustomerID join [Order Details] as od on od.OrderID = o.OrderID group by c.CompanyName ```
