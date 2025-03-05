@@ -73,8 +73,8 @@ select s.CompanyName as 'Provedor', sum(od.Quantity) as 'Total de productos vend
 select count(OrderID), CompanyName from Orders as o join Shippers as s on o.ShipVia = s.ShipperID group by s.CompanyName
 
 -- 19 ordenar los clientes que han realizado pedidos con mas de un producto 
-select c.CompanyName, count( distinct ProductID) as 'Numero Productos' from Customers as c join Orders as o on c.CustomerID = o.CustomerID join [Order Details] as od on od.OrderID = o.OrderID group by c.CompanyName
-order by 2 desc
+select c.CompanyName, count( distinct ProductID) as 'Numero Productos' from Customers as c join Orders as o on c.CustomerID = o.CustomerID 
+join [Order Details] as od on od.OrderID = o.OrderID group by c.CompanyName order by 2 desc
 
 -- 20 listar los empleados con la cantidad total de pedidios que han gestionado, y que clientes les han vendido, agrupandolos por nombre completo y dentro
 -- de este nombre por cliente, ordenandolos por la cantidad de mayor de pedidos 
@@ -106,4 +106,22 @@ select p.ProductName, c.CategoryName from Products as p join Categories as c on 
 select c.CompanyName from Customers as c join Orders as o on c.CustomerID = o.CustomerID where Country = 'germany ' and o.OrderDate <= '1997-01-01'
 
 -- 26 listar los clientes que an realizado pedidos con un total entre $500 y $2000
-select c.CompanyName, sum(od.Quantity * od.UnitPrice) as Total from Customers as c join Orders as o on c.CustomerID = o.CustomerID join [Order Details] as od on od.OrderID = o.OrderID group by c.CompanyNam
+select c.CompanyName, sum(od.Quantity * od.UnitPrice) as Total from Customers as c join Orders as o on c.CustomerID = o.CustomerID join [Order Details] as od on od.OrderID = o.OrderID group by c.CompanyName
+
+-- left join, right join, full join y cross join 
+select * from Categories as c join Products as p on c.CategoryID = p.CategoryID where c.CategoryName = 'fast food'
+
+select * from Categories
+
+select c.CategoryName, c.CategoryID, p.CategoryID, p.ProductName from Categories as c left join Products as p on c.CategoryID = p.CategoryID
+
+select * from Products
+
+insert into Products (ProductName, SupplierID, CategoryID, QuantityPerUnit, UnitPrice, UnitsInStock, UnitsOnOrder, ReorderLevel, Discontinued)
+values ('Burger sabrosa', 1, 9, 'xyz', 68.7, 45, 12, 2 ,0)
+
+-- practicas de utilizacion de left join seleccionar los datos que se van a utilizar para insertar en la tabla  products_new 
+  
+-- productid , productName, Customer, Category, unitprice, discontinued, inserted_date
+
+select * from productnew
