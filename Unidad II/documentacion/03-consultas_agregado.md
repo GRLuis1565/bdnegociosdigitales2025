@@ -1,9 +1,9 @@
 # Ejercicios consultas agregado
 
-```sql
--- consultas de agregado 
--- nota: solo devuelven un solo registro sum, avg, count, count(*), max y min
+- consultas de agregado 
+- nota: solo devuelven un solo registro sum, avg, count, count(*), max y min
 
+```sql
 use Northwind
 
 -- cuantos clientes tengo 

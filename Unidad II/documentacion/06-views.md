@@ -1,15 +1,14 @@
 # Ejercicios de Views / Vistas en sql 
-```sql
--- VIEWS
 
--- SINTAXIS 
+- VIEWS
+- SINTAXIS 
 /*create view nombreVista
 as 
 select columnas 
 from tabla
 where condicion
 */
-
+```sql
 use Northwind
 
 GO

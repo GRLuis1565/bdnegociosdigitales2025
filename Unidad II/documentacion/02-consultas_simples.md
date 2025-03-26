@@ -1,11 +1,12 @@
 # Ejercicios de consultas simples 
+
+- Lenguaje SQL LMD (insert, update, delete, select, - CRUD)
+- Consultas Simples 
 ```sql
--- Lenguaje SQL LMD (insert, update, delete, select, - CRUD)
--- Consultas Simples 
-
 use Northwind
-
--- Mostrar todos los clientes, provedores, categorias, productos, ordenes, detalle de la orden, empleados con las con las columnas de datos de la empresa 
+```
+- Mostrar todos los clientes, provedores, categorias, productos, ordenes, detalle de la orden, empleados con las con las columnas de datos de la empresa 
+```sql
 select * from Customers;
 select * from Employees;
 select * from Orders;
@@ -16,6 +17,7 @@ select * from Categories;
 select * from [Order Details];
 
 -- Proyeccion 
+
 select ProductID, ProductName, UnitPrice, UnitsInStock from Products;
 
 -- Mostrar el numero del empleado, primer nombre, cargo, ciudad, pais
