@@ -95,7 +95,7 @@ select max(Num_Pedido) from Pedidos
 declare @importe money 
 select @importe = (p.Cantidad * pr.Precio)
 from Pedidos as p join Productos as pr on p.Fab = pr.Id_fab and p.Producto = pr.Id_producto
-insert into Pedidos (Num_Pedido, Fecha_Pedido, Cliente, rep, fab, Producto, Cantidad, Importe)
+delete from Pedidos (Num_Pedido, Fecha_Pedido, Cliente, rep, fab, Producto, Cantidad, Importe)
 values (113071, GETDATE(), 2103, 106, 'aci', '41001', 77, @importe)
 
 select * from Productos
