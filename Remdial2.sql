@@ -20,10 +20,6 @@ select top 10 p.ProductName, p.UnitPrice, od.Discount, p.UnitsInStock, sum((p.Un
 group by p.ProductName, p.UnitPrice, od.Discount, p.UnitsInStock
 
 -- 6. Crear una vista que muestre con informacion del cliente em empleado el total del pedido inclullendo el descuento numero de orden nombre de cliente nombre del empleado completo fecha de la orden total del pedido 
-go
-create or alter view [dbo].[Pedidos_detalle]
-as 
-select c.CompanyName, concat(e.FirstName, ' ', e.LastName),  from Customers as c join Orders as o on c.CustomerID = o.CustomerID join Employees as e on o.EmployeeID = e.EmployeeID join [Order Details] as od on o.OrderID = od.OrderID
 
 go
 create or alter view [dbo].[Pedidos_detalle]

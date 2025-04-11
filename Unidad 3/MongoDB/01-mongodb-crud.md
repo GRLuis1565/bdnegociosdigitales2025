@@ -8,7 +8,8 @@ use base de datos
 
 ## Crear una coleccion
 
-```use db1
+```json
+use db1
 db.createColeccion('Empleado')
 ```
 
@@ -29,7 +30,7 @@ db.Empleado.insertOne(
 )
 
 # Insercion de un documento mas complejo con array 
-```js 
+```json
 db.empleado.insertOne({
     nombre:'Ivan',
     apellido:'Baltazar',
